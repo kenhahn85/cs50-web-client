@@ -4,5 +4,5 @@
 
 3) run the following commands:
 beefy app.js:bundle.js
-jsx --watch view-src view
+jsx --watch view-src views
 node static-server
