@@ -1,0 +1,20 @@
+{
+  "name": "songtron-web-client",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "beefy index.js:bundle.js --live",
+    "bundle": "browserify index.js -o bundle.js"
+  },
+  "dependencies": {
+    "beefy": "^2.1.1",
+    "express": "*",
+    "lodash": "*",
+    "backbone": "*",
+    "jquery": "*",
+    "browserify": "^7.0.0",
+    "react-tools": "*",
+    "react": "*",
+    "pubsub-js": "*"
+  }
+}

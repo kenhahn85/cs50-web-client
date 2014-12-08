@@ -1,0 +1,8 @@
+1) install the latest versions of nodejs and npm
+
+2) npm install beefy browserify react-tools -g
+
+3) run the following commands:
+beefy app.js:bundle.js
+jsx --watch view-src view
+node static-server
