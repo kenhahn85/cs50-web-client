@@ -6,14 +6,21 @@
     "start": "beefy index.js:bundle.js --live",
     "bundle": "browserify index.js -o bundle.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "beefy": "^2.1.1",
+    "browserify": "^7.0.0",
+    "del": "*",
+    "gulp": "*",
+    "gulp-less-sourcemap": "*",
+    "gulp-react": "*",
+    "reactify": "*",
+    "vinyl-source-stream": "*"
+  },
+  "dependencies": {
     "express": "*",
     "lodash": "*",
     "backbone": "*",
     "jquery": "*",
-    "browserify": "^7.0.0",
-    "react-tools": "*",
     "react": "*",
     "pubsub-js": "*"
   }

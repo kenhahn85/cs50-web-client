@@ -1,8 +1,9 @@
 1) install the latest versions of nodejs and npm
 
-2) npm install beefy browserify react-tools -g
-
-3) run the following commands:
-beefy app.js:bundle.js
-jsx --watch view-src views
+3) run the following commands in separate terminals, from this directory:
+gulp
 node static-server
+
+TODO: browsersync and minification integration
+http://webdesign.tutsplus.com/tutorials/a-quick-introduction-to-browsersync--cms-22135
+
