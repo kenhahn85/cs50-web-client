@@ -7,13 +7,20 @@
     "bundle": "browserify index.js -o bundle.js"
   },
   "devDependencies": {
-    "beefy": "^2.1.1",
     "browserify": "^7.0.0",
+    "coffee-script": "*",
     "del": "*",
+    "event-stream": "*",
     "gulp": "*",
+    "gulp-buffer": "*",
     "gulp-less-sourcemap": "*",
     "gulp-react": "*",
-    "reactify": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-typescript": "*",
+    "gulp-uglify": "*",
+    "macro": "*",
+    "through": "*",
+    "vinyl-transform": "*",
     "vinyl-source-stream": "*"
   },
   "dependencies": {

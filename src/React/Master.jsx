@@ -3,8 +3,9 @@ var Root = require('./Components/Root');
 
 module.exports = {
   render: function(){
+    //testing
     React.render(
-      React.createElement(Root, null),
+      <Root />,
       document.getElementsByTagName('body')[0]
     )
   }
