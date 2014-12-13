@@ -16,8 +16,8 @@ $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
     };
 });
 
-//#ASSERT 1 === 77
-//#ASSERT+ 1 === 2, 'hello?'
+//#ASSERT 1 === 1
+//#ASSERT+ 1 === 1, 'hello?'
 
 window.Global = {
     currentUser: null,

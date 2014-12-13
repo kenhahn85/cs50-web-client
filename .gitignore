@@ -5,3 +5,5 @@ node_modules
 build
 static/bundle.js
 src/js/React
+main.css
+main.css.map

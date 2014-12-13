@@ -8,9 +8,9 @@
   },
   "devDependencies": {
     "browserify": "^7.0.0",
+    "browser-sync": "*",
     "coffee-script": "*",
     "del": "*",
-    "event-stream": "*",
     "gulp": "*",
     "gulp-buffer": "*",
     "gulp-less-sourcemap": "*",

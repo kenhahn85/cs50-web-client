@@ -2,14 +2,15 @@ require('coffee-script/register');
 
 // Load some modules which are installed through NPM.
 var browserify = require('browserify');  // Bundles JS.
+var browserSync = require('browser-sync');
 var buffer = require('gulp-buffer');
 var del = require('del');  // Deletes files.
-var eventStream = require('event-stream');
 var fs = require('fs');
 var gulp = require('gulp');
 var less = require('gulp-less-sourcemap');  // To compile Stylus CSS.
 var path = require('path');
 var react = require('gulp-react');
+var reload = browserSync.reload;
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
 var through = require('through');
@@ -23,7 +24,6 @@ var paths = {
   less: ['./src/less/**/*.less'],
   app_js: ['./build/intJs/app.js'],
   react: ['src/react/**/*'],
-  ts: ['src/ts/**/*'],
   // specifically omit React folder in this list, because it will trigger task loop that will terminate with error
   js: ['src/js/app.js']
 };
@@ -45,12 +45,13 @@ gulp.task('less', ['cleanCss'], function () {
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(gulp.dest('./static/css'));
+    .pipe(gulp.dest('./static/css'))
+    .pipe(reload({stream: true}));
 });
 
 // Our JS task. It will Browserify our code and compile React JSX files.
 gulp.task('browserify', ['replaceMacros'], function() {
-  browserify(paths.app_js, {debug: true})
+  return browserify(paths.app_js, {debug: true})
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
@@ -109,30 +110,24 @@ gulp.task('react', ['cleanReact'], function(done) {
     .pipe(gulp.dest('./' + REACT_DEST));
 });
 
-// inclusion of typescripts questionable. need to reconsider.
-gulp.task('typescripts', function(done) {
-  return done();
-  var tsResult = gulp.src('src/ts/**/*.ts')
-    .pipe(sourcemaps.init({}))
-    .pipe(ts({
-      declarationFiles: true,
-      noExternalResolve: true
-    }))
+gulp.task('browser-sync', ['browserify'], function() {
+  browserSync({
+    server: {
+      baseDir: "./static"
+    }
+  });
+});
 
-  return eventStream.merge(
-    tsResult.dts.pipe(gulp.dest('src/definitions')),
-    tsResult.js.pipe(gulp.dest('src/js'))
-      .pipe(sourcemaps.write())
-  );
+gulp.task('browser-sync-reload', ['browserify'], function() {
+  reload();
 });
 
 // setting up browserify as a dep here instead of as part of the default task is very important.
 // prevents overlapping cleanReact jobs with react jobs.
-gulp.task('watch', ['browserify'], function() {
+gulp.task('watch', ['browser-sync'], function() {
   gulp.watch(paths.less, ['less']);
-  gulp.watch(paths.ts, ['typescripts']);
-  gulp.watch(paths.js, ['browserify']);
-  gulp.watch(paths.react, ['browserify']);
+  gulp.watch(paths.js, ['browser-sync-reload']);
+  gulp.watch(paths.react, ['browser-sync-reload']);
 });
 
 // The default task (called when we run `gulp` from cli)

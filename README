@@ -4,6 +4,6 @@
 gulp
 node static-server
 
-TODO: browsersync and minification integration
-http://webdesign.tutsplus.com/tutorials/a-quick-introduction-to-browsersync--cms-22135
-
+TODO: browsersync integration
+- http://webdesign.tutsplus.com/tutorials/a-quick-introduction-to-browsersync--cms-22135
+- typescript integration
