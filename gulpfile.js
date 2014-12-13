@@ -5,6 +5,7 @@ var browserify = require('browserify');  // Bundles JS.
 var browserSync = require('browser-sync');
 var buffer = require('gulp-buffer');
 var del = require('del');  // Deletes files.
+var eventStream = require('event-stream');
 var fs = require('fs');
 var gulp = require('gulp');
 var less = require('gulp-less-sourcemap');  // To compile Stylus CSS.
@@ -23,7 +24,8 @@ var uglify = require('gulp-uglify');
 var paths = {
   less: ['./src/less/**/*.less'],
   app_js: ['./build/intJs/app.js'],
-  react: ['src/react/**/*'],
+  react: ['src/React/**/*'],
+  ts: ['src/ts/**/*'],
   // specifically omit React folder in this list, because it will trigger task loop that will terminate with error
   js: ['src/js/app.js']
 };
@@ -120,6 +122,22 @@ gulp.task('browser-sync', ['browserify'], function() {
 
 gulp.task('browser-sync-reload', ['browserify'], function() {
   reload();
+});
+
+gulp.task('typescripts', function(done) {
+  return done();
+  var tsResult = gulp.src('src/ts/**/*.ts')
+    .pipe(sourcemaps.init({}))
+    .pipe(ts({
+      declarationFiles: true,
+      noExternalResolve: true
+    }))
+
+  return eventStream.merge(
+    tsResult.dts.pipe(gulp.dest('src/definitions')),
+    tsResult.js.pipe(gulp.dest('src/js'))
+      .pipe(sourcemaps.write())
+  );
 });
 
 // setting up browserify as a dep here instead of as part of the default task is very important.

@@ -4,6 +4,11 @@
 gulp
 node static-server
 
-TODO: browsersync integration
-- http://webdesign.tutsplus.com/tutorials/a-quick-introduction-to-browsersync--cms-22135
-- typescript integration
+If running from VM, when browser-syncing w/ phone, need to activate bridge mode on the VM, instead of NAT. See: http://stackoverflow.com/questions/3244650/windows-xp-exposing-websites-in-iis-in-local-network
+
+---------------------
+
+TODO:
+get rid of all global namespaces and re-evaluate typescript
+jest + gulp + tape
+rearchitect such that all listeners are at the to level, and modify state from the root down, or something.
